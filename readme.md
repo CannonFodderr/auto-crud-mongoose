@@ -8,8 +8,8 @@ Automatic generation of RESTFUL CRUD API routes for Express server with Mongoose
 
 * npm install express mongoose auto-crud-mongoose
 * create an express server
-* require('auto-crud-mongoose').default
-    **i.e.** const autoCrud = require('auto-crud-mongoose).default
+* require('auto-crud-mongoose')
+    **i.e.** const autoCrud = require('auto-crud-mongoose)
 * require mongoose modeles
     **i.e.** const User = require('./db/models/user.js')
 * use generate a full rest route
