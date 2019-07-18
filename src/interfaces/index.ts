@@ -2,8 +2,8 @@ import {Router} from 'express'
 import {Model} from 'mongoose'
 
 export interface ICRUDRouter{
-    collection: Model<any, {}>
-    router: Router
+    readonly collection: Model<any, {}>
+    readonly router: Router
     handlers: IHandlers
     middleware: any
 }

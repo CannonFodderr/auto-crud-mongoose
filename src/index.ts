@@ -2,7 +2,7 @@ import {Router, Request, Response, NextFunction} from 'express'
 import {Model, Error} from 'mongoose'
 import {ICRUDRouter, IHandlers} from './interfaces/index'
 
-export class CRUDRouter implements ICRUDRouter{
+class CRUDRouter implements ICRUDRouter{
     collection: Model<any, {}>
     router: Router
     middleware: any
@@ -50,7 +50,7 @@ export default (collection: Model<any, {}>, customMiddleware?: any, customHandle
         post: (req: Request, res:Response) => {
             collection.create(req.body)
             .then(createdEntry => {
-                console.log(createdEntry)
+                console.log("Created new entry:", createdEntry)
                 createdEntry.save()
                 res.status(201).send(`Created new entry`)
             })

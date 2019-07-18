@@ -1,6 +1,6 @@
 {
   "name": "auto-crud-mongoose",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Automatic CRUD Routes generator for Express with Mongoose",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
