@@ -1,6 +1,8 @@
-# Auto-CRUD-Mongoose
+# auto-crud-mongoose
 
-Automatic generation of RESTFUL CRUD routes for Express server with Mongoose.
+Automatic generation of RESTFUL CRUD API routes for Express server with Mongoose.
+
+**By default** API routes will return a **JSON** response.
 
 ## Setup
 
@@ -39,6 +41,20 @@ Automatic generation of RESTFUL CRUD routes for Express server with Mongoose.
         delete: (req, res) => { res.send("DELETE method not allowed!")}
     }
 
+#### REST Routes
+Use the express app.use prefix to define a specific route.
+Learn more on [expressjs.com/routing](https://expressjs.com/en/guide/routing.html)
+**app.use('/myPrefix', dbModel)**
+
+    {
+        get => /
+        getById => /:id
+        post => /
+        put => /:id
+        delete => /:id
+    }
 
 ## Contact me
 [Linkedin](https://www.linkedin.com/in/idan-izhaki/)
+[GitHub](https://github.com/CannonFodderr)
+Contribute to [this repo](https://github.com/CannonFodderr/auto-crud-mongoose)
