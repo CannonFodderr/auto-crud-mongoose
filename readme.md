@@ -19,7 +19,7 @@ Automatic generation of RESTFUL CRUD API routes for Express server with Mongoose
     * or **All toghether now:** app.use(User, autoCrud(User, myMiddleware, myHandlers))
 
 #### Define middleware
-    Currently middleware is defined on all routes
+Currently middleware is defined on all routes
 
         (req, res, next) => {
             console.log("Hi from middleware")
@@ -55,6 +55,6 @@ Learn more on [expressjs.com/routing](https://expressjs.com/en/guide/routing.htm
     }
 
 ## Contact me
-[Linkedin](https://www.linkedin.com/in/idan-izhaki/)
-[GitHub](https://github.com/CannonFodderr)
-Contribute to [this repo](https://github.com/CannonFodderr/auto-crud-mongoose)
+* [Linkedin](https://www.linkedin.com/in/idan-izhaki/)
+* [GitHub](https://github.com/CannonFodderr)
+* Contribute to [this repo](https://github.com/CannonFodderr/auto-crud-mongoose)
