@@ -7,7 +7,11 @@ Automatic generation of RESTFUL CRUD API routes for Express server with Mongoose
 ## Setup
 
 * npm install express mongoose auto-crud-mongoose
+
 * create an express server
+
+* **use body-parser** or similar packages to parse post/put request body
+
 * require('auto-crud-mongoose')
     **i.e.** const autoCrud = require('auto-crud-mongoose)
 
@@ -24,16 +28,23 @@ Automatic generation of RESTFUL CRUD API routes for Express server with Mongoose
     * or **All toghether now:** app.use(User, autoCrud(User, myMiddleware, myHandlers))
 
 #### Define middleware
-Currently middleware is defined on all routes
+You can create a specific middleware for each route. **omited routes will be ignored.**
 
-        (req, res, next) => {
-            console.log("Hi from middleware")
-            next()
+        const myMiddleware = {
+            get: (req: Request, res: Response, next: NextFunction) => {
+                console.log("Hello from GET middleware)
+                next()
+            },
+            getById: (req: Request, res: Response, next: NextFunction) => next(),
+            post: (req: Request, res: Response, next: NextFunction) => next(),
+            put: (req: Request, res: Response, next: NextFunction) => next(),
+            delete: (req: Request, res: Response, next: NextFunction) => next(),
         }
 
 
 #### Handlers config:
 you can define handlers for specific route or leave it out to use the default handler
+
     {
         get: (req, res) => { ... },
         getById: (req, res) => { ... },
@@ -41,7 +52,9 @@ you can define handlers for specific route or leave it out to use the default ha
         put: (req, res ) => { ... },
         delete: (req, res) => { ... }
     }
-    Example:
+
+Example:
+
     {
         delete: (req, res) => { res.send("DELETE method not allowed!")}
     }

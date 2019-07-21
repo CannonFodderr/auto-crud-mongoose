@@ -16,7 +16,7 @@
   "scripts": {
     "build": "tsc",
     "start": "tsc && node dist/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tsc test/app.ts && node test/app.js"
   },
   "author": "Idan Izhaki",
   "license": "ISC",
@@ -27,5 +27,8 @@
     "@types/mongoose": "^5.5.8",
     "@types/node": "^12.6.8",
     "typescript": "^3.5.3"
+  },
+  "devDependencies": {
+    "body-parser": "^1.19.0"
   }
 }

@@ -1,33 +1,40 @@
 import {Router, Request, Response, NextFunction} from 'express'
 import {Model, Error} from 'mongoose'
-import {ICRUDRouter, IHandlers} from './interfaces/index'
+import {ICRUDRouter, IHandlers, IMiddleware} from './interfaces/index'
+
+
 
 class CRUDRouter implements ICRUDRouter{
     collection: Model<any, {}>
     router: Router
-    middleware: any
+    middleware: IMiddleware
     handlers: any
-    constructor(collection: any, middleware:any, handlers: IHandlers){
+    constructor(collection: Model<any, {}>, middleware:IMiddleware, handlers: IHandlers){
         this.collection = collection
         this.router = Router()
         this.middleware = middleware
         this.handlers = handlers
         // Read All Route
-        this.router.get('/', this.middleware, handlers.get)
+        this.router.get('/', this.middleware.get, handlers.get)
         // Read Route
-        this.router.get('/:id', this.middleware, handlers.getById)
+        this.router.get('/:id', this.middleware.getById, handlers.getById)
         // Create Route
-        this.router.post('/', this.middleware, handlers.post)
+        this.router.post('/', this.middleware.post, handlers.post)
         // Update Route
-        this.router.put('/:id', this.middleware, handlers.put)
+        this.router.put('/:id', this.middleware.put, handlers.put)
         // Destroy Route
-        this.router.delete('/:id', this.middleware, handlers.delete)
+        this.router.delete('/:id', this.middleware.delete, handlers.delete)
     }
 }
 
-export default (collection: Model<any, {}>, customMiddleware?: any, customHandlers?:IHandlers) => {
-    let middleware = (req: Request, res: Response, next: NextFunction) => next()
-    middleware = customMiddleware ? customMiddleware : middleware
+export default (collection: Model<any, {}>, customMiddleware?: IMiddleware, customHandlers?:IHandlers) => {
+    let middleware:IMiddleware = {
+        get: (req: Request, res: Response, next: NextFunction) => next(),
+        getById: (req: Request, res: Response, next: NextFunction) => next(),
+        post: (req: Request, res: Response, next: NextFunction) => next(),
+        put: (req: Request, res: Response, next: NextFunction) => next(),
+        delete: (req: Request, res: Response, next: NextFunction) => next(),
+    }
     const handlers: IHandlers = {
         get: (req: Request, res: Response) => {
             collection.find()
@@ -87,6 +94,9 @@ export default (collection: Model<any, {}>, customMiddleware?: any, customHandle
     }
     if(customHandlers){
         Object.keys(customHandlers).forEach(key => handlers[key] = customHandlers[key])
+    }
+    if(customMiddleware){
+        Object.keys(customMiddleware).forEach(key => middleware[key] = customMiddleware[key])
     }
     return new CRUDRouter(collection, middleware, handlers).router
 }
