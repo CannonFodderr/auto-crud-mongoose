@@ -27,7 +27,7 @@ class CRUDRouter implements ICRUDRouter{
     }
 }
 
-export default (collection: Model<any, {}>, customMiddleware?: IMiddleware, customHandlers?:IHandlers) => {
+module.exports = (collection: Model<any, {}>, customMiddleware?: IMiddleware, customHandlers?:IHandlers) => {
     let middleware:IMiddleware = {
         get: (req: Request, res: Response, next: NextFunction) => next(),
         getById: (req: Request, res: Response, next: NextFunction) => next(),
